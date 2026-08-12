@@ -1,0 +1,57 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    main.container.narrow
+      header.page-header
+        div
+          p.eyebrow HubSpot Academy
+          h1 Add a #{objectLabel.slice(0, -1) || objectLabel}
+          p.subtitle Create a new CRM record through the HubSpot API.
+
+      if error
+        div.alert.error(role="alert")
+          strong Unable to save:
+          |  #{error}
+
+      form.card(action="/update-cobj", method="POST")
+        .form-group
+          label(for="name") Name
+          input#name(
+            type="text"
+            name="name"
+            value=values.name || ""
+            required
+            placeholder="e.g. The Hobbit"
+          )
+
+        .form-group
+          label(for="author") Author
+          input#author(
+            type="text"
+            name="author"
+            value=values.author || ""
+            required
+            placeholder="e.g. J.R.R. Tolkien"
+          )
+
+        .form-group
+          label(for="genre") Genre
+          input#genre(
+            type="text"
+            name="genre"
+            value=values.genre || ""
+            required
+            placeholder="e.g. Fantasy"
+          )
+
+        .actions
+          a.button.secondary(href="/") Return to the homepage
+          button.button(type="submit") Create record
+
+      footer
+        p Integrating With HubSpot I: Foundations Practicum

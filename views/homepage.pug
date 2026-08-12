@@ -1,0 +1,44 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title= title
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    main.container
+      header.page-header
+        div
+          p.eyebrow HubSpot Academy
+          h1= objectLabel
+          p.subtitle Custom object records retrieved through the HubSpot API.
+        a.button(href="/update-cobj") Add to this table
+
+      if error
+        div.alert.error(role="alert")
+          strong API error:
+          |  #{error}
+
+      if !error && records.length === 0
+        div.empty
+          h2 No records found
+          p Create your first #{objectLabel.toLowerCase()} record using the form.
+      else if !error
+        .table-wrapper
+          table
+            thead
+              tr
+                th Name
+                th Author
+                th Genre
+                th HubSpot Record ID
+            tbody
+              each record in records
+                tr
+                  td= record.properties.name || ""
+                  td= record.properties.author || ""
+                  td= record.properties.genre || ""
+                  td.record-id= record.id
+
+      footer
+        p Integrating With HubSpot I: Foundations Practicum
